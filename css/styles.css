@@ -1,0 +1,6 @@
+body{font-family:Segoe UI, Tahoma, Geneva, Verdana, sans-serif; margin:0; padding:0; background:#f7f7f7}
+header{background:#2b6cb0;color:white;padding:1rem}
+nav a{color:white;margin-right:1rem;text-decoration:none}
+main{padding:2rem}
+.card{background:white;padding:1rem;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+footer{padding:1rem;text-align:center;color:#666}

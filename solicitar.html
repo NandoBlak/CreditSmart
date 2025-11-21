@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Solicitar - Proyecto HTML</title>
+  <style>
+    body{font-family:Segoe UI, Tahoma, Geneva, Verdana, sans-serif; margin:0;background:#fff}
+    header{background:#2b6cb0;color:white;padding:1rem}
+    nav a{color:white;margin-right:1rem;text-decoration:none}
+    main{padding:2rem}
+    .card{background:#f9fafb;padding:1rem;border-radius:8px;max-width:640px}
+    label{display:block;margin-top:.5rem}
+    input[type="text"], input[type="email"], textarea{width:100%;padding:.5rem;margin-top:.25rem;border:1px solid #ccc;border-radius:4px}
+    button{margin-top:1rem;padding:.6rem 1rem;border:none;border-radius:6px;background:#2b6cb0;color:white;cursor:pointer}
+    .success{margin-top:1rem;padding:.75rem;background:#e6ffed;border-radius:6px;color:#0b6b2f}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Solicitar información</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="simulador.html">Simulador</a>
+      <a href="solicitar.html">Solicitar</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Formulario de solicitud (demo)</h2>
+      <p>Rellena el formulario y verás una confirmación (no se envía a servidor).</p>
+
+      <form id="formSolicitud">
+        <label>Nombre
+          <input type="text" id="nombre" required>
+        </label>
+
+        <label>Email
+          <input type="email" id="email" required>
+        </label>
+
+        <label>Motivo / Mensaje
+          <textarea id="mensaje" rows="5" required></textarea>
+        </label>
+
+        <button type="submit">Enviar solicitud</button>
+      </form>
+
+      <div id="confirm" class="success" style="display:none"></div>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById('formSolicitud').addEventListener('submit', function(e){
+      e.preventDefault();
+      const nombre = document.getElementById('nombre').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const mensaje = document.getElementById('mensaje').value.trim();
+
+      // Simulación de envío — mostrar confirmación
+      const c = document.getElementById('confirm');
+      c.style.display = 'block';
+      c.innerHTML = `<strong>Gracias, ${nombre || 'usuario'}.</strong> Hemos recibido tu solicitud. Revisaremos el mensaje y contactaremos a <em>${email}</em> si es necesario.<br><br><em>Resumen:</em> ${mensaje ? (mensaje.length>200 ? mensaje.slice(0,200)+"..." : mensaje) : '(sin mensaje)'} `;
+
+      // Limpiar formulario (opcional)
+      this.reset();
+    });
+  </script>
+</body>
+</html>
