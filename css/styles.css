@@ -51,6 +51,7 @@ footer{padding:1rem;text-align:center;color:#666}
 /* Formulario solicitud */
 form#formSolicitud{margin-top:1rem;display:flex;flex-direction:column;gap:1.5rem}
 .form-block{border:1px solid #e2e8f0;padding:1rem 1rem 1.25rem;border-radius:10px;background:#ffffff}
+.centered-container{max-width:920px;margin:0 auto}
 .form-block legend{font-weight:600;padding:0 0.4rem;font-size:0.95rem;color:#2d3748}
 .form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
 .form-group{display:flex;flex-direction:column;gap:0.35rem}
