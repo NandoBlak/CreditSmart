@@ -9,7 +9,10 @@
 </head>
 <body>
   <header>
-    <h1>Proyecto HTML — Páginas de ejemplo</h1>
+    <div class="header-hero">
+      <h1>Bienvenido a CreditSmart</h1>
+      <p class="slogan">Decisiones claras, oportunidades seguras.</p>
+    </div>
     <nav>
       <a href="index.html">Inicio</a>
       <a href="simulador.html">Simulador</a>
@@ -18,14 +21,13 @@
   </header>
 
   <main>
-    <section class="card">
-      <h2>Bienvenido</h2>
-      <p>Este proyecto contiene tres páginas estáticas: <strong>`index.html`</strong>, <strong>`simulador.html`</strong> y <strong>`solicitar.html`</strong>. Usa la navegación arriba para moverte entre ellas.</p>
-      <ul>
-        <li>`index.html` — página principal (esta).</li>
-        <li>`simulador.html` — ejemplo de una pequeña aplicación en cliente (simulador).</li>
-        <li>`solicitar.html` — formulario de envío (sin backend, confirmación en cliente).</li>
-      </ul>
+    <!-- Sección de productos crediticios -->
+    <section class="card" id="productos-credito">
+      <h2>Productos crediticios disponibles</h2>
+      <p>Elige el producto que más se ajuste a tus necesidades y haz clic en "Ver detalles" o "Solicitar".</p>
+      <div id="productos-grid" class="products-grid" aria-live="polite">
+        <!-- Las tarjetas se generan dinámicamente desde `js/main.js` -->
+      </div>
     </section>
   </main>
 
