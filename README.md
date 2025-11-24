@@ -109,18 +109,6 @@ npx http-server -p 8000
 <p align="center">
   <img src="docs/screenshots/index.png" alt="Página Principal" width="80%">
 </p>
-
-### Simulador de Créditos
-![Simulador](docs/screenshots/simulador.png)
-
-### Calculadora de Cuotas
-![Calculadora](docs/screenshots/simular.png)
-
-### Formulario de Solicitud
-![Formulario](docs/screenshots/solicitar.png)
-
----
-
 | Inicio | Simulador |
 |--------|-----------|
 | ![Inicio](docs/screenshots/index.png) | ![Simulador](docs/screenshots/simulador.png) |
