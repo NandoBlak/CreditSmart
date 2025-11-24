@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Solicitar - Proyecto HTML</title>
+  <title>Solicitar Crédito - CreditSmart</title>
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <style>
     body{font-family:Segoe UI, Tahoma, Geneva, Verdana, sans-serif; margin:0;background:#fff}
@@ -19,7 +19,10 @@
 </head>
 <body>
   <header>
-    <h1>Solicitar información</h1>
+    <div class="header-hero">
+      <h1>Solicitud de Crédito</h1>
+      <p class="slogan">Completa tus datos para procesar la solicitud.</p>
+    </div>
     <nav>
       <a href="index.html">Inicio</a>
       <a href="simulador.html">Simulador</a>
@@ -28,24 +31,83 @@
   </header>
 
   <main>
-    <section class="card">
-      <h2>Formulario de solicitud (demo)</h2>
-      <p>Rellena el formulario y verás una confirmación (no se envía a servidor).</p>
+    <section class="card" style="max-width:920px">
+      <h2 style="margin-top:0">Formulario de Solicitud</h2>
+      <p class="small-muted">Los datos son sólo demostrativos y no se envían a un servidor.</p>
 
-      <form id="formSolicitud">
-        <label>Nombre
-          <input type="text" id="nombre" required>
-        </label>
+      <form id="formSolicitud" novalidate>
+        <fieldset class="form-block">
+          <legend>Datos personales</legend>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="nombreCompleto">Nombre completo</label>
+              <input type="text" id="nombreCompleto" required>
+            </div>
+            <div class="form-group">
+              <label for="cedula">Cédula</label>
+              <input type="number" id="cedula" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+              <label for="telefono">Teléfono</label>
+              <input type="tel" id="telefono" required>
+            </div>
+          </div>
+        </fieldset>
 
-        <label>Email
-          <input type="email" id="email" required>
-        </label>
+        <fieldset class="form-block">
+          <legend>Datos del Crédito</legend>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="tipoCredito">Tipo de crédito</label>
+              <select id="tipoCredito" required></select>
+            </div>
+            <div class="form-group">
+              <label for="montoSolicitado">Monto solicitado</label>
+              <input type="number" id="montoSolicitado" min="0" step="10000" required>
+            </div>
+            <div class="form-group">
+              <label for="plazoMeses">Plazo en meses</label>
+              <select id="plazoMeses" required>
+                <option value="12">12</option>
+                <option value="24">24</option>
+                <option value="36">36</option>
+                <option value="48">48</option>
+                <option value="60">60</option>
+              </select>
+            </div>
+            <div class="form-group form-group-full">
+              <label for="destinoCredito">Destino del crédito</label>
+              <textarea id="destinoCredito" rows="4" required></textarea>
+            </div>
+          </div>
+        </fieldset>
 
-        <label>Motivo / Mensaje
-          <textarea id="mensaje" rows="5" required></textarea>
-        </label>
+        <fieldset class="form-block">
+          <legend>Datos Laborales</legend>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="empresa">Empresa donde trabaja</label>
+              <input type="text" id="empresa" required>
+            </div>
+            <div class="form-group">
+              <label for="cargo">Cargo</label>
+              <input type="text" id="cargo" required>
+            </div>
+            <div class="form-group">
+              <label for="ingresos">Ingresos mensuales</label>
+              <input type="number" id="ingresos" min="0" step="10000" required>
+            </div>
+          </div>
+        </fieldset>
 
-        <button type="submit">Enviar solicitud</button>
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">Enviar Solicitud</button>
+          <button type="button" id="btnLimpiar" class="btn-outline">Limpiar Formulario</button>
+        </div>
       </form>
 
       <div id="confirm" class="success" style="display:none"></div>
@@ -53,22 +115,6 @@
   </main>
 
   <script src="js/bootstrap.bundle.min.js"></script>
-
-  <script>
-    document.getElementById('formSolicitud').addEventListener('submit', function(e){
-      e.preventDefault();
-      const nombre = document.getElementById('nombre').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const mensaje = document.getElementById('mensaje').value.trim();
-
-      // Simulación de envío — mostrar confirmación
-      const c = document.getElementById('confirm');
-      c.style.display = 'block';
-      c.innerHTML = `<strong>Gracias, ${nombre || 'usuario'}.</strong> Hemos recibido tu solicitud. Revisaremos el mensaje y contactaremos a <em>${email}</em> si es necesario.<br><br><em>Resumen:</em> ${mensaje ? (mensaje.length>200 ? mensaje.slice(0,200)+"..." : mensaje) : '(sin mensaje)'} `;
-
-      // Limpiar formulario (opcional)
-      this.reset();
-    });
-  </script>
+  <script src="js/solicitar.js" defer></script>
 </body>
 </html>
