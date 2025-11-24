@@ -101,12 +101,91 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="product-rate">${p.tasa}</div>
         <div class="product-meta">Monto disponible: <strong>${p.montoDesde}</strong> — <strong>${p.montoHasta}</strong></div>
         <div class="product-actions">
-          <a class="btn-outline" href="solicitar.html?id=${p.id}" aria-label="Ver detalles de ${p.nombre}">Ver detalles</a>
+          <a class="btn-outline btn-detalles" href="solicitar.html?id=${p.id}" data-product="${p.id}" aria-label="Ver detalles de ${p.nombre}">Ver detalles</a>
           <a class="btn-primary" href="solicitar.html?solicitar=${p.id}" aria-label="Solicitar ${p.nombre}">Solicitar</a>
         </div>
       </article>
     `).join('');
   }
+
+  // Mapa de requisitos por tipo de crédito
+  const requisitosPorTipo = {
+    libre: [
+      'Documento de identidad (cédula).',
+      'Certificación de ingresos o extractos bancarios.',
+      'Comprobante de domicilio reciente.',
+      'Formulario de solicitud firmado.'
+    ],
+    vehiculo: [
+      'Documento de identidad (cédula).',
+      'Cotización o factura del vehículo (si aplica).',
+      'Certificación de ingresos o balance.',
+      'Póliza SOAT y documentos del vehículo (si se requiere garantía).'
+    ],
+    vivienda: [
+      'Documento de identidad (cédula).',
+      'Avaluó o promesa de compraventa (si aplica).',
+      'Certificación de ingresos y pronósticos financieros.',
+      'Documentos del inmueble (escrituras, paz y salvo de predial).'
+    ],
+    educativo: [
+      'Documento de identidad (cédula).',
+      'Certificado de matrícula o carta de aceptación institucional.',
+      'Plan de estudios y costos detallados.',
+      'Certificación de ingresos o garante (si aplica).'
+    ],
+    empresarial: [
+      'Documento de identidad (cédula) del representante legal.',
+      'Estados financieros y balances de la empresa.',
+      'Cámara de comercio y documentación legal de la empresa.',
+      'Plan de negocio o proyección de flujo de caja.'
+    ]
+  };
+
+  function showProductModal(productId){
+    const p = productos.find(x => x.id === productId);
+    if(!p) return;
+    // Rellenar campos del modal
+    const titleEl = document.getElementById('modal-title');
+    const subEl = document.getElementById('modal-sub');
+    const iconEl = document.getElementById('modal-icon');
+    const tasaEl = document.getElementById('modal-tasa');
+    const montoEl = document.getElementById('modal-monto');
+    const plazoEl = document.getElementById('modal-plazo');
+    const descEl = document.getElementById('modal-descripcion');
+    const reqEl = document.getElementById('modal-requisitos');
+    const solicitarBtn = document.getElementById('modal-solicitar');
+
+    titleEl.textContent = p.nombre;
+    subEl.textContent = `Plazo máximo: ${p.plazoMax}`;
+    iconEl.innerHTML = getIconSVG(p.tipo);
+    tasaEl.textContent = p.tasa;
+    montoEl.textContent = `${p.montoDesde} — ${p.montoHasta}`;
+    plazoEl.textContent = p.plazoMax;
+    descEl.textContent = p.descripcion || 'Producto diseñado para ajustarse a distintas necesidades financieras.';
+
+    // Requisitos: combinación de requisitos comunes + específicos por tipo
+    const comunes = ['Documento de identidad válido.', 'Cuenta bancaria o medio de pago.', 'Formulario de solicitud completo.'];
+    const tipoReq = requisitosPorTipo[p.tipo] || [];
+    const lista = [...comunes, ...tipoReq];
+    reqEl.innerHTML = lista.map(item => `<li>${item}</li>`).join('');
+
+    solicitarBtn.setAttribute('href', `solicitar.html?solicitar=${p.id}`);
+
+    // Mostrar modal usando API de Bootstrap
+    const modalEl = document.getElementById('productoModal');
+    const modal = new bootstrap.Modal(modalEl);
+    modal.show();
+  }
+
+  // Delegación de eventos: detectar clicks en "Ver detalles"
+  document.addEventListener('click', function(e){
+    const target = e.target.closest('.btn-detalles');
+    if(!target) return;
+    e.preventDefault();
+    const pid = target.getAttribute('data-product');
+    if(pid) showProductModal(pid);
+  });
 
   renderProductos();
 });

@@ -3,23 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Simulador - Proyecto HTML</title>
+  <title>Simulador de Crédito - CreditSmart</title>
   <link rel="stylesheet" href="css/bootstrap.min.css">
-  <style>
-    body{font-family:Segoe UI, Tahoma, Geneva, Verdana, sans-serif; margin:0;background:#f0f4f8}
-    header{background:#2b6cb0;color:white;padding:1rem}
-    nav a{color:white;margin-right:1rem;text-decoration:none}
-    main{padding:2rem}
-    .card{background:white;padding:1rem;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,.08);max-width:640px}
-    label{display:block;margin-top:.5rem}
-    input[type="number"], input[type="text"]{width:100%;padding:.5rem;margin-top:.25rem;border:1px solid #ccc;border-radius:4px}
-    button{margin-top:1rem;padding:.6rem 1rem;border:none;border-radius:6px;background:#2b6cb0;color:white;cursor:pointer}
-    .result{margin-top:1rem;padding:.75rem;background:#eef6ff;border-radius:6px}
-  </style>
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <header>
-    <h1>Simulador sencillo</h1>
+    <div class="header-hero">
+      <h1>Simulador de Crédito</h1>
+      <p class="slogan">Explora productos y filtra según tus metas.</p>
+    </div>
     <nav>
       <a href="index.html">Inicio</a>
       <a href="simulador.html">Simulador</a>
@@ -28,53 +21,39 @@
   </header>
 
   <main>
-    <section class="card">
-      <h2>Calculadora de interés compuesto</h2>
-      <p>Introduce la cantidad, la tasa anual (%) y los años; el simulador calcula el monto final.</p>
+    <section class="card" id="filtros">
+      <h2>Buscar y Filtrar Créditos</h2>
+      <p>Los datos son estáticos y las acciones son solo visuales.</p>
+      <div class="filters-bar">
+        <div class="filters-group">
+          <label for="busqueda">Buscar por nombre</label>
+          <input type="text" id="busqueda" placeholder="Ej: vivienda, vehículo..." aria-label="Buscar por nombre de producto">
+        </div>
+        <div class="filters-group">
+          <label for="rango">Rango de monto</label>
+          <select id="rango" aria-label="Filtrar por rango de monto">
+            <option value="todos">Todos</option>
+            <option value="0-5000000">$0 - $5.000.000</option>
+            <option value="5000000-50000000">$5.000.000 - $50.000.000</option>
+            <option value="50000000-200000000">$50.000.000 - $200.000.000</option>
+            <option value="200000000-100000000000">$200.000.000 - $1.000.000.000+</option>
+          </select>
+        </div>
+      </div>
+    </section>
 
-      <label>Capital inicial (EUR)
-        <input id="capital" type="number" value="1000" min="0" step="0.01">
-      </label>
-
-      <label>Tasa anual (%)
-        <input id="tasa" type="number" value="5" min="0" step="0.01">
-      </label>
-
-      <label>Años
-        <input id="años" type="number" value="5" min="0" step="1">
-      </label>
-
-      <label>Composición por año (n)
-        <input id="n" type="number" value="12" min="1" step="1">
-      </label>
-
-      <button id="calcular">Calcular</button>
-
-      <div id="resultado" class="result" aria-live="polite" style="display:none"></div>
+    <section class="card" id="resultados">
+      <h2>Resultados</h2>
+      <div id="productos-grid" class="products-grid" aria-live="polite"></div>
+      <p id="sin-resultados" class="small-muted" style="display:none">No hay productos que coincidan con los criterios.</p>
     </section>
   </main>
 
-  <script src="js/bootstrap.bundle.min.js"></script>
+  <footer>
+    <small>Simulación visual. No genera cálculos reales.</small>
+  </footer>
 
-  <script>
-    function formatCurrency(x){
-      return new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR'}).format(x);
-    }
-
-    document.getElementById('calcular').addEventListener('click', ()=>{
-      const P = parseFloat(document.getElementById('capital').value) || 0;
-      const r = (parseFloat(document.getElementById('tasa').value) || 0)/100;
-      const t = parseFloat(document.getElementById('años').value) || 0;
-      const n = parseFloat(document.getElementById('n').value) || 1;
-
-      // Fórmula monto = P * (1 + r/n)^(n*t)
-      const A = P * Math.pow(1 + r / n, n * t);
-      const interés = A - P;
-
-      const out = document.getElementById('resultado');
-      out.style.display = 'block';
-      out.innerHTML = `<strong>Monto final:</strong> ${formatCurrency(A)}<br><strong>Interés ganado:</strong> ${formatCurrency(interés)}`;
-    });
-  </script>
+  <script src="js/bootstrap.bundle.min.js" defer></script>
+  <script src="js/simulador.js" defer></script>
 </body>
 </html>
