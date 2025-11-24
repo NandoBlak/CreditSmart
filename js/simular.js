@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const tasaDisplay = document.getElementById('tasa-anual-fija');
   const btnCalcular = document.getElementById('btn-calcular');
   const btnReset = document.getElementById('btn-reset');
+  const btnVolver = document.getElementById('btn-volver');
   const resultadosEl = document.getElementById('resultados');
 
   // Cargar datos
@@ -79,7 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
       Tasa mensual equivalente: <strong>${(i*100).toFixed(3)}% M.E.</strong><br>
       Cuota mensual aproximada: <strong>${formatoPesos(Math.round(cuota))}</strong><br>
       Total pagado: <strong>${formatoPesos(Math.round(totalPagado))}</strong><br>
-      Intereses aproximados: <strong>${formatoPesos(Math.round(totalInteres))}</strong>
+      Intereses aproximados: <strong>${formatoPesos(Math.round(totalInteres))}</strong><br>
+      <a href="solicitar.html?solicitar=${producto.id}&monto=${P}&plazo=${n}" class="btn-primary" style="margin-top:.6rem;display:inline-block" aria-label="Solicitar crédito ${producto.nombre}">Solicitar crédito</a>
     `;
     resultadosEl.style.display='block';
   }
@@ -89,6 +91,14 @@ document.addEventListener('DOMContentLoaded', () => {
     montoInput.value = Math.round((producto.montoMin + producto.montoMax) / 2 / 10000) * 10000;
     mesesInput.value = Math.min( Math.round(producto.plazoMaxMeses/2), producto.plazoMaxMeses );
     resultadosEl.style.display='none';
+  });
+
+  btnVolver.addEventListener('click', () => {
+    if(window.history.length > 1){
+      window.history.back();
+    } else {
+      window.location.href = 'simulador.html';
+    }
   });
 
   // Recalcular automáticamente al cambiar

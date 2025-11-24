@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const card = e.target.closest('.product-card.clickable');
     if(!card) return;
     const pid = card.getAttribute('data-product');
-    if(pid) window.open(`simular.html?id=${pid}`, '_blank');
+    if(pid) window.location.href = `simular.html?id=${pid}`;
   });
 
   grid.addEventListener('keydown', (e) => {
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const card = e.target.closest('.product-card.clickable');
       if(!card) return;
       const pid = card.getAttribute('data-product');
-      if(pid) window.open(`simular.html?id=${pid}`, '_blank');
+      if(pid) window.location.href = `simular.html?id=${pid}`;
     }
   });
 });
