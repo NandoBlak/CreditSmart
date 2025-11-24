@@ -103,6 +103,32 @@ npx http-server -p 8000
 - No hay backend, toda la lógica es del lado del cliente
 - Los formularios muestran confirmación sin envío real
 
+## 📸 Capturas de Pantalla
+
+### Página Principal
+<p align="center">
+  <img src="docs/screenshots/index.png" alt="Página Principal" width="80%">
+</p>
+
+### Simulador de Créditos
+![Simulador](docs/screenshots/simulador.png)
+
+### Calculadora de Cuotas
+![Calculadora](docs/screenshots/simular.png)
+
+### Formulario de Solicitud
+![Formulario](docs/screenshots/solicitar.png)
+
+---
+
+| Inicio | Simulador |
+|--------|-----------|
+| ![Inicio](docs/screenshots/index.png) | ![Simulador](docs/screenshots/simulador.png) |
+
+| Calcular | Solicitar |
+|----------|-----------|
+| ![Calcular](docs/screenshots/simular.png) | ![Solicitar](docs/screenshots/solicitar.png) |
+
 ---
 
 **Desarrollado por Hernando Pérez | IU Digital de Antioquia | 2025**
