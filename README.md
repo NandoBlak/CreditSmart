@@ -104,11 +104,6 @@ npx http-server -p 8000
 - Los formularios muestran confirmación sin envío real
 
 ## 📸 Capturas de Pantalla
-
-### Página Principal
-<p align="center">
-  <img src="docs/screenshots/index.png" alt="Página Principal" width="80%">
-</p>
 | Inicio | Simulador |
 |--------|-----------|
 | ![Inicio](docs/screenshots/index.png) | ![Simulador](docs/screenshots/simulador.png) |
