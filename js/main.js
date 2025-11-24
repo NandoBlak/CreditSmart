@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function () {
     descEl.textContent = p.descripcion || 'Producto diseñado para ajustarse a distintas necesidades financieras.';
 
     // Requisitos: combinación de requisitos comunes + específicos por tipo
-    const comunes = ['Documento de identidad válido.', 'Cuenta bancaria o medio de pago.', 'Formulario de solicitud completo.'];
+    const comunes = ['Cuenta bancaria o medio de pago.', 'Formulario de solicitud completo.'];
     const tipoReq = requisitosPorTipo[p.tipo] || [];
     const lista = [...comunes, ...tipoReq];
     reqEl.innerHTML = lista.map(item => `<li>${item}</li>`).join('');
