@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function render(lista){
     if(!grid) return;
     grid.innerHTML = lista.map(p => `
-      <article class="product-card" role="article" aria-labelledby="${p.id}-title">
+      <article class="product-card clickable" tabindex="0" role="button" aria-labelledby="${p.id}-title" data-product="${p.id}" aria-pressed="false">
         <div class="product-top">
           <div class="product-icon" aria-hidden="true">${getIconSVG(p.tipo)}</div>
           <div>
@@ -90,10 +90,6 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
         <div class="product-rate">${p.tasa}</div>
         <div class="product-meta">Monto disponible: <strong>${p.montoDesde}</strong> — <strong>${p.montoHasta}</strong></div>
-        <div class="product-actions">
-          <a class="btn-outline" href="index.html" aria-label="Ver detalles de ${p.nombre}">Ver detalles</a>
-          <a class="btn-primary" href="solicitar.html?solicitar=${p.id}" aria-label="Solicitar ${p.nombre}">Solicitar</a>
-        </div>
       </article>
     `).join('');
     sinResultados.style.display = lista.length ? 'none' : 'block';
@@ -117,4 +113,21 @@ document.addEventListener('DOMContentLoaded', () => {
   selectRango.addEventListener('change', filtrar);
 
   render(productos);
+
+  // Abrir nueva pestaña de simulación al hacer click o Enter
+  grid.addEventListener('click', (e) => {
+    const card = e.target.closest('.product-card.clickable');
+    if(!card) return;
+    const pid = card.getAttribute('data-product');
+    if(pid) window.open(`simular.html?id=${pid}`, '_blank');
+  });
+
+  grid.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter'){
+      const card = e.target.closest('.product-card.clickable');
+      if(!card) return;
+      const pid = card.getAttribute('data-product');
+      if(pid) window.open(`simular.html?id=${pid}`, '_blank');
+    }
+  });
 });
